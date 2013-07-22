@@ -1,12 +1,12 @@
 goconfig
 ========
 
-Goconif is a configuration file parser for the Go Programming Language. It is based on [goconf](https://code.google.com/p/goconf/).
+Goconfig is a configuration file parser for the Go Programming Language. It is based on [goconf](https://code.google.com/p/goconf/).
 
-Goconf has a few new features:
+Goconfig has a few new features:
 
  - It gives more detailed errors
- - There is no need to specify a section name in the configuration file ("default" is assumed as the section name)
+ - There is no need to specify a section name in the config file ("default" is assumed as the section name)
  - It can now read from a byte slice or io.Reader
  - It can now write to a byte slice or io.Writer
  - Returns default value on error or missing option
