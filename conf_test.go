@@ -79,4 +79,12 @@ func TestBuild(t *testing.T) {
 			}
 		}
 	}
+
+    if 43 != c.Int("port", 123) {
+        t.Error("c.Int(\"port\") did not return 43")
+    }
+
+    if 123 != c.Int("ports", 123) {
+        t.Error("c.Int(\"ports\") did not return 123")
+    }
 }

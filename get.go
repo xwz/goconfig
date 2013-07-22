@@ -150,3 +150,31 @@ func (c *ConfigFile) GetBool(section string, option string) (value bool, err err
 
 	return value, nil
 }
+
+func (c *ConfigFile) String(option string, value string) (string) {
+    if c.HasOption("default", option) {
+        value, _ = c.GetString("default", option)
+    }
+    return value
+}
+
+func (c *ConfigFile) Int(option string, value int) (int) {
+    if c.HasOption("default", option) {
+        value, _ = c.GetInt("default", option)
+    }
+    return value
+}
+
+func (c *ConfigFile) Float64(option string, value float64) (float64) {
+    if c.HasOption("default", option) {
+        value, _ = c.GetFloat64("default", option)
+    }
+    return value
+}
+
+func (c *ConfigFile) Bool(option string, value bool) (bool) {
+    if c.HasOption("default", option) {
+        value, _ = c.GetBool("default", option)
+    }
+    return value
+}
