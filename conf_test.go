@@ -47,7 +47,7 @@ var testSet = []interface{}{
 
 var options struct {
     Host string
-    Port int
+    Port uint
     Compression bool
 }
 

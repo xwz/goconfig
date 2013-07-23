@@ -196,6 +196,8 @@ func (c *ConfigFile) GetStruct(section string, obj interface{}) {
                     field.SetFloat(c.Float64(name, field.Float()))
                 case "int":
                     field.SetInt(int64(c.Int(name, int(field.Int()))))
+                case "uint":
+                    field.SetUint(uint64(c.Int(name, int(field.Uint()))))
             }
         }
     }
