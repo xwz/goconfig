@@ -45,6 +45,12 @@ var testSet = []interface{}{
 	//stringtest{"service-1", "url", "http://example.com/something"},
 }
 
+var options struct {
+    Host string
+    Port int
+    Compression bool
+}
+
 func TestBuild(t *testing.T) {
 	c, err := ReadConfigBytes([]byte(confFile))
 	if err != nil {
@@ -86,5 +92,19 @@ func TestBuild(t *testing.T) {
 
     if 123 != c.Int("ports", 123) {
         t.Error("c.Int(\"ports\") did not return 123")
+    }
+
+    c.Struct(&options)
+
+    if "example.com" != options.Host {
+        t.Error("options.Host did not equal to 'example.com' string")
+    }
+
+    if 43 != options.Port {
+        t.Error("options.Port did not equal to int 43")
+    }
+
+    if true != options.Compression {
+        t.Error("options.Compression did not equal to bool true")
     }
 }

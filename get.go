@@ -3,6 +3,7 @@ package conf
 import (
 	"strconv"
 	"strings"
+    "reflect"
 )
 
 // GetSections returns the list of sections in the configuration.
@@ -177,4 +178,29 @@ func (c *ConfigFile) Bool(option string, value bool) (bool) {
         value, _ = c.GetBool("default", option)
     }
     return value
+}
+
+// Sets the struct primitive values as the option values in section
+func (c *ConfigFile) GetStruct(section string, obj interface{}) {
+    ref := reflect.ValueOf(obj).Elem()
+    for i := 0; i < ref.NumField(); i++ {
+        field := ref.Field(i)
+        name := ref.Type().Field(i).Name
+        if c.HasOption(section, name) && field.CanSet() {
+            switch field.Type().Name() {
+                case "bool":
+                    field.SetBool(c.Bool(name, field.Bool()))
+                case "string":
+                    field.SetString(c.String(name, field.String()))
+                case "float64":
+                    field.SetFloat(c.Float64(name, field.Float()))
+                case "int":
+                    field.SetInt(int64(c.Int(name, int(field.Int()))))
+            }
+        }
+    }
+}
+
+func (c *ConfigFile) Struct(obj interface{}) {
+    c.GetStruct("default", obj)
 }
